@@ -9,7 +9,7 @@ class App extends Component {
     }
 
     callAPI() {
-        fetch(process.env.APIURL)
+        fetch("http://13.217.59.178:3000/testAPI")
             .then(res => res.text())
             .then(res => this.setState({ apiResponse: res }))
             .catch(err => err);
