@@ -1,13 +1,16 @@
 version: 0.2
 
+env:
+  variables:
+    AWS_DEFAULT_REGION: us-east-1
+    AWS_ACCOUNT_ID: 101249931006
+    IMAGE_REPO_NAME: devbank-frontend
+    IMAGE_TAG: latest
+
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - AWS_ACCOUNT_ID=872352220406
-      - AWS_DEFAULT_REGION=us-east-1
-      - IMAGE_REPO_NAME=devbank-frontend
-      - IMAGE_TAG=latest
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
 
   build:
