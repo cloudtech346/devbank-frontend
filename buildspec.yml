@@ -20,7 +20,7 @@ phases:
       - echo Push image
       - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
       - docker push $ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/devbank-frontend:latest
-      - printf '[{"name":"frontend-container","imageUri":"%s"}]' $ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/devbank-frontend:latest > imagedefinitions.json
+      - echo '[{"name":"frontend-container","imageUri":"'"$ACCOUNT_ID"'.dkr.ecr.us-east-1.amazonaws.com/devbank-frontend:latest"}]' > imagedefinitions.json
 
 artifacts:
   files:
