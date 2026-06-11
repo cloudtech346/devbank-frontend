@@ -16,6 +16,11 @@ phases:
       - docker tag devbank-frontend:latest $ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/devbank-frontend:latest
 
   post_build:
-    commands:
-      - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-      - docker push $ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/devbank-frontend:latest
+  commands:
+    - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+    - docker push $ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/devbank-frontend:latest
+    - printf '[{"name":"frontend-container","imageUri":"%s"}]' $ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/devbank-frontend:latest > imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
